@@ -17,7 +17,7 @@ def main():
     run = True
     clock = pg.time.Clock()
 
-    system = thermoSystem(600, 1E-18, (700, 100, 1100, 900))
+    system = thermoSystem(500, 1E-19, [850, 450, 950, 550])
 
     draw = drawThermo(Win, system)
 
@@ -45,7 +45,6 @@ def main():
             Win.fill((10, 40, 70))
             draw.draw()
             draw.draw_data()
-            # print(system.get_positions())
             pg.display.update()
 
         counter += 1

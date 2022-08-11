@@ -331,7 +331,8 @@ class drawThermo:
 
         self.Win = Win
         self.object = object
-        self.data = []
+        self.data = [500]
+        self.FONT = pg.font.SysFont("courier", 16)
 
     def draw(self):
 
@@ -342,4 +343,21 @@ class drawThermo:
             pg.draw.circle(self.Win, (255, 255, 0), position, 1)
 
     def draw_data(self):
-        pass
+
+        Entropy = self.object.get_entropy()
+        n = self.object.get_n()
+        data = self.data
+        scale = 10/n
+
+        #scrolling mechanism
+        #change from initial energy
+        if len(data) >= 1500:
+            data.pop(0)
+            data.append(500 + (Entropy[1] - Entropy[0]) * scale)
+        else:
+            data.append(500 + (Entropy[1] - Entropy[0]) * scale)
+
+        #pairing index values with the list values in a new list
+        entropytext = self.FONT.render(f"{round(Entropy[0], -1)}J/K", 1, (200, 200, 200))
+        pg.draw.lines(self.Win, (255, 255, 255), False, [(x + 150, y) for x, y in enumerate(data)], 1)
+        self.Win.blit(entropytext, (100, 100))
