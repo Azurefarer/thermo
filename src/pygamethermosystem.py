@@ -17,7 +17,7 @@ def main():
     run = True
     clock = pg.time.Clock()
 
-    system = thermoSystem(500, 1E-19, [850, 450, 950, 550])
+    system = thermoSystem(2000, 1E-18, [850, 450, 950, 550])
 
     draw = drawThermo(Win, system)
 
@@ -26,8 +26,8 @@ def main():
 
     #frame rate and efficiency stuff
     counter = 0
-    dt = 1/100
-    max_count = 10
+    dt = 1/25
+    max_count = 5
 
     while run:
 
